@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	*{margin:0;padding: 0;}
+	button{display: inline-block;}
+	button:nth-child(1){background: blue;}
+	button:nth-child(2){background: yellow;}
+	button:nth-child(3){background: green;}
+	.out1{width: 500px;height: 400px;border: 1px solid red;position: relative;}
+	.out{overflow: scroll;width: 500px;height: 400px;}
+	.inner{width: 1500px;height: 400px;overflow: hidden;}
+	li{width: 500px;height: 400px;float: left;}
+	.blue{background: blue;}
+	.yellow{background: yellow;}
+	.green{background: green;}
+	p{width: 50px;height: 50px;background: red;}
+	.left{position: absolute;left: 0;top: 225px;}
+	.right{position: absolute;right: 0;top: 225px;}
+</style>
+<body>
+	<button>蓝色</button>
+	<button>黄色</button>
+	<button>绿色</button>
+	<div class="out1">
+		<div class="out">
+			<ul class="inner">
+				<li class="blue"></li>
+				<li class="yellow"></li>
+				<li class="green"></li>	
+			</ul>	
+			
+		</div>
+		<p class="left"></p>	
+			<p class="right"></p>	
+	</div>	
+</body>
+<script src="jquery-1.8.3.min.js"></script>
+<script>
+$(function(){
+	var x=0,_this=null;
+	$("button").click(function(){
+		x=$(this).index();
+		_this=$(this);
+		console.log("x1="+x);
+		$(".out").animate({scrollLeft:500*x},1000);
+		$('button').eq(x).css("background","red").siblings().css("background","");
+		})
+	$(".left").click(function(){
+		x--;
+		//alert(x);
+		if(x<0){
+			x=2;
+		}	
+		$('button').eq(x).css("background","red").siblings().css("background","");
+		console.log("x2="+x);
+		$(".out").stop().animate({scrollLeft:500*x},1000);
+		})
+	$(".right").click(function(){
+		x++;
+		if(x>2){
+			x=0;
+		}
+		$('button').eq(x).css("background","red").siblings().css("background","");
+		console.log("x2="+x);
+		$(".out").stop().animate({scrollLeft:500*x},1000);
+	})
+	
+	
+})
+</script>
+</html>
